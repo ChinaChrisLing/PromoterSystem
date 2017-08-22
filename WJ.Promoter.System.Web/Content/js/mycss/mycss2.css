@@ -1,0 +1,145 @@
+﻿
+
+
+
+
+/*= common css to all effects =*/
+.single-member {
+    width: 380px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+.member-image img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.member-h3 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 10px 0 0;
+    text-transform: uppercase;
+}
+
+.member-h5 {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0 0 15px;
+    line-height: 22px;
+}
+
+.member-p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 32px;
+    padding: 0 30px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+    .member-p span {
+        margin-left: 25px;
+    }
+
+.social-touch a {
+    display: inline-block;
+    width: 27px;
+    height: 26px;
+    vertical-align: middle;
+    margin: 0 2px;
+    background-image: url(../images/social-icons.png);
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+    .social-touch a:hover {
+        opacity: 1;
+        transition: 0.3s;
+    }
+
+.fb-touch {
+    background-position: 0 0;
+}
+
+.tweet-touch {
+    background-position: -35px 0;
+}
+
+.linkedin-touch {
+    background-position: -71px 0;
+}
+
+.icon-colored .fb-touch {
+    background-position: 0 -27px;
+}
+
+.icon-colored .tweet-touch {
+    background-position: -35px -27px;
+}
+
+.icon-colored .linkedin-touch {
+    background-position: -71px -27px;
+}
+
+.effect-1 {
+    border-radius: 5px 5px 0 0;
+    padding-bottom: 40px;
+}
+
+    .effect-1 .member-image {
+        border: 3px solid #b9d0e1;
+        border-radius: 60px 60px;
+        display: inline-block;
+        margin-top: -72px;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+    .effect-1 .social-touch {
+        background-color: #d87c7c;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 5px;
+        overflow: hidden;
+        padding: 5px 0 0;
+        width: 100%;
+        transition: 0.3s;
+    }
+
+    .effect-1 .member-image img {
+        transition: 0.3s;
+        border-radius: 60px 0;
+    }
+
+    .effect-1:hover .member-image {
+        border-color: #d87c7c;
+        transition: 0.3s;
+        border-radius: 50%;
+    }
+
+    .effect-1:hover .social-touch {
+        padding: 6px 0;
+        height: 38px;
+        transition: 0.3s;
+    }
+
+/*@media only screen and (max-width: 980px) {
+    .row {
+        width: 100%;
+        margin: 110px 0;
+    }
+
+    .team-members {
+        text-align: center;
+    }
+
+    .single-member {
+        float: none;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+}*/

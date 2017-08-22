@@ -1,0 +1,44 @@
+﻿h1, .alpha {
+    margin-bottom: 1.5rem;
+    font-size: 4.2rem;
+    font-weight: 100;
+    line-height: 1;
+    letter-spacing: -.05em;
+}
+
+.wrap {
+    max-width: 38rem;
+    margin: 0 auto;
+}
+
+.site__header {
+    -webkit-animation: bounceInUp 1s;
+}
+
+.site__title {
+    color: #f35626;
+    background-image: -webkit-linear-gradient(92deg,#48c2a1,#e94f2e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 60s infinite linear;
+}
+
+.site__content {
+    -webkit-animation: bounceInUp 1s;
+    -webkit-animation-delay: .1s;
+}
+
+    .site__content form {
+        -webkit-animation: bounceInUp 1s;
+        -webkit-animation-delay: .1s;
+    }
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}

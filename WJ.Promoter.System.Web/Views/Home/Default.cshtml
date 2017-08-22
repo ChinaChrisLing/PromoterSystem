@@ -1,0 +1,237 @@
+﻿@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="../../Content/css/framework-font.css" rel="stylesheet" />
+    <link href="../../Content/css/framework-ui.css" rel="stylesheet" />
+    <script src="../../Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <link href="../../Content/css/framework-theme.css" rel="stylesheet" />
+    <link href="../../Content/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Content/js/echart/echarts.min.js"></script>
+    <script src="../../Content/js/echart/vintage.js"></script>
+    <script src="../../content/js/indextab.js"></script>
+    @*<script src="../../Content/js/framework-ui.js"></script>*@
+</head>
+<body>
+    <div id="areascontent">
+        <div class="rows" style="margin-bottom: 1%; border: 1px solid #e6e6e6; overflow: hidden; padding-left: 1px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background: rgb(254, 248, 239); -webkit-tap-highlight-color: transparent;">
+                    <i class="fa  fa-refresh fa-lg" onclick="$.reload()" style="padding-right: 5px;" data-toggle="popover" data-placement="bottom" data-content="刷新数据"></i>
+                    <div style="float: right; position: relative; top: -4px; right: 0px;">
+                        <iframe id="fweather" style="margin-right: -108px; " name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=10&icon=3" width="330" height="35" allowtransparency="true" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+                <div class="panel-body" style="background: rgb(254, 248, 239); -webkit-tap-highlight-color: transparent;padding:10px;">
+                    <div class="dashboard-stats" style="border-radius: 10px">
+                        <div class="dashboard-stats-item" style="background-color: #d87c7c;">
+                            <h2 class="m-top-none">流水统计</h2>
+                            <h5>本周总流水:&nbsp;</h5>
+                            <h5>本月总流水:&nbsp;</h5>
+                            <h5>本年总流水:&nbsp;</h5>
+                            <h5>累计总流水:&nbsp;</h5>
+                            <div class="stat-icon">
+                                <i class="fa fa-bar-chart-o fa-4-5x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-stats" style="border-radius: 10px">
+                        <div class="dashboard-stats-item" style="background-color: #61a0a8;">
+                            <h2 class="m-top-none">利润统计</h2>
+                            <h5>本周总利润:&nbsp;</h5>
+                            <h5>本月总利润:&nbsp;</h5>
+                            <h5>本年总利润:&nbsp;</h5>
+                            <h5>累计总利润:&nbsp;</h5>
+                            <div class="stat-icon">
+                                <i class="fa fa-rmb fa-4-5x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-stats" style="border-radius: 10px">
+                        <div class="dashboard-stats-item" style="background-color: #d7ab82;">
+                            <h2 class="m-top-none">代理统计</h2>
+                            <h5>一级代理:&nbsp;</h5>
+                            <h5>二级代理:&nbsp;</h5>
+                            <h5>三级代理:&nbsp;</h5>
+                            <h5>总代理数:&nbsp;</h5>
+                            <div class="stat-icon">
+                                <i class="fa fa-users fa-4-5x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rows" style="margin-bottom: 1%; overflow: hidden;">
+            <div style="float: left; width: 40%;">
+                <div style="height: 300px; border: 1px solid #e6e6e6; background-color: #fff;" id="chart1">
+                </div>
+            </div>
+            <div style="float: right; width: 60%;">
+                <div style="height: 300px; border: 1px solid #e6e6e6; background-color: #fff; " id="chart2">
+                </div>
+            </div>
+        </div>
+        <div class="rows" style="margin-bottom: 1%; overflow: hidden;">
+            <div style="float: left; width: 40%;">
+                <div style="height: 300px; border: 1px solid #e6e6e6; background-color: #fff; " id="chart3">
+                </div>
+            </div>
+            <div style="float: right; width: 60%;">
+                <div style="height: 300px; border: 1px solid #e6e6e6; background-color: #fff; " id="chart4">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../Content/js/myjs/jj.js"></script>
+    <style>
+        .dashboard-stats-item {
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            cursor: pointer;
+            height: 150px;
+            padding: 10px 10px 5px 20px;
+            border-radius: 10px;
+            transform: translateZ(0);
+        }
+
+            .dashboard-stats-item :hover {
+                transform: scale(1.05);
+            }
+
+        .dashboard-stats:hover {
+            transform: scale(1.05);
+            /*box-shadow: 4px -4px 4px #888888,4px 4px 4px #888888,4px 4px 4px #888888,-4px -4px 4px #888888;*/
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 0 150px rgba(0, 0, 0, .3) inset;
+        }
+
+        #copyrightcontent {
+            height: 30px;
+            line-height: 29px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            margin-top: -30px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #e6e6e6;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .dashboard-stats {
+            float: left;
+            width: 30%;
+            margin-left: 2%;
+            margin-right: 1%;
+            /*padding: 5px;*/
+            /*position: relative;*/
+            -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 150px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 150px rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 150px rgba(0, 0, 0, 0.1) inset;
+        }
+
+        /*.dashboard-stats::after, .dashboard-stats::before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.8);
+                -moz-box-shadow: 0 0 20px rgba(0,0,0,0.8);
+                box-shadow: 0 0 20px rgba(0,0,0,0.8);
+                top: 50%;
+                bottom: 0;
+                left: 10px;
+                right: 10px;
+                -moz-border-radius: 100px / 10px;
+                border-radius: 100px / 10px;
+            }*/
+
+        .dashboard-stats-item .m-top-none {
+            margin-top: 2px;
+        }
+
+        .dashboard-stats-item h2 {
+            font-size: 16px;
+            font-family: inherit;
+            line-height: 1.1;
+            font-weight: 500;
+        }
+
+        .dashboard-stats-item h5 {
+            font-size: 13px;
+            font-family: inherit;
+            margin-top: 3px;
+            line-height: 1.1;
+        }
+
+
+        .dashboard-stats-item .stat-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            opacity: .3;
+        }
+
+        .dashboard-stats i.fa.stats-icon {
+            width: 50px;
+            padding: 20px;
+            font-size: 50px;
+            text-align: center;
+            color: #fff;
+            height: 50px;
+            border-radius: 10px;
+        }
+
+        .panel-default {
+            border: none;
+            border-radius: 0px;
+            margin-bottom: 0px;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+
+            .panel-default > .panel-heading {
+                color: #777;
+                background-color: #fff;
+                border-color: #e6e6e6;
+                padding: 10px 10px;
+            }
+
+            /*.panel-default > .panel-body {
+                padding: 10px;
+                padding-bottom: 0px;
+            }*/
+
+            .panel-default > .panel-body ul {
+                overflow: hidden;
+                padding: 0;
+                margin: 0px;
+                margin-top: -5px;
+            }
+
+                .panel-default > .panel-body ul li {
+                    line-height: 27px;
+                    list-style-type: none;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+
+                    .panel-default > .panel-body ul li .time {
+                        color: #a1a1a1;
+                        float: right;
+                        padding-right: 5px;
+                    }
+    </style>
+    <script src="/Content/js/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="popover"]').popover({ trigger: "hover" });
+        })
+    </script>
+</body>
+</html>

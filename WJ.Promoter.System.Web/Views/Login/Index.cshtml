@@ -1,0 +1,237 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headers{
+    @*@Styles.Render("~/bundles/cssLoginFirst")
+    @Scripts.Render("~/bundles/scriptLoginFirst")*@
+
+}
+<div  style="margin: 1px auto;text-align: center;font-size: 20px;color: #ec2020;background: #91b8da; display: none;">
+    因您的浏览器版本太低很多功能都无法完美展示给您，请您点击更新一下
+    <a href="http://sw.bos.baidu.com/sw-search-sp/software/414b186aaa936/EOIE11-WindowsXP-x86.exe" style=" margin 0px 10px;">微软 IE</a>
+    <a href="http://dlsw.baidu.com/sw-search-sp/soft/78/17803/GoogleChromeframeStandaloneEnterprise.4144293914.msi" style=" margin 0px 10px;">谷歌 Chrome</a>
+    <a href="http://sw.bos.baidu.com/sw-search-sp/software/edc8537bcc714/Firefox_54.0.1.6388_setup.exe" style=" margin 0px 10px;">火狐 Fox</a>
+    <a href="http://sw.bos.baidu.com/sw-search-sp/software/d2a588f7cae20/Opera_46.0.2597.61_setup.exe" style=" margin 0px 10px;">欧朋 Opera</a>
+    <a href="http://sw.bos.baidu.com/sw-search-sp/software/cebf9960c2a76/360aqllq_9.1.0.342.exe" style=" margin 0px 10px;">360</a>
+</div>
+<div class="wrapper">
+    <div class="container">
+        <div class="logo">
+            <header class="site__header island">
+                <div class="wrap">
+                    <span id="animationSandbox"><h1 class="site__title mega">闲雅棋牌推广后台</h1></span>
+                </div>
+            </header>
+        </div>
+        <form class="form">
+            <div class="row">
+                <input id="txt_account" type="text" placeholder="用户名/手机号/邮箱">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="row">
+                <input id="txt_password" type="password" placeholder="登录密码">
+                <i class="fa fa-key"></i>
+            </div>
+            <div class="row">
+                <input id="txt_code" maxlength="4" type="text" placeholder="验证码" style="width: 190px; float: left;">
+                <div style="width: 110px; float: right; padding-top: 14px; padding-left: 14px;">
+                    看不清？<a id="switchCode" href="javascript:void(0)" style="text-decoration: none;">换一张</a>
+                    <img id="imgcode" class="authcode" width="80" height="25" src="/Login/GetAuthCode" />
+                </div>
+            </div>
+            <div class="row">
+                <button id="login_button" type="button"><span>登录</span></button>
+            </div>
+            <div class="row">
+            </div>
+        </form>
+        <div class="login_tips"></div>
+    </div>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div class="copyright">
+    <a href="http://www.vk51.com/" style="text-decoration:none;color:#fff;">千智游戏互动</a>
+    <br>
+    适用浏览器：IE9以上、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗.
+</div>
+@section scripts{
+    <script type="text/javascript">
+        (function ($) {
+            $.login = {
+                formMessage: function (msg) {
+                    $('.login_tips').find('.tips_msg').remove();
+                    $('.login_tips').append('<div class="tips_msg"><i class="fa fa-question-circle"></i>' + msg + '</div>');
+                },
+                loginClick: function () {
+                    var $username = $("#txt_account");
+                    var $password = $("#txt_password");
+                    var $code = $("#txt_code");
+                    if ($username.val() == "") {
+                        $username.focus();
+                        $.login.formMessage('请输入用户名/手机号/邮箱。');
+                        return false;
+                    } else if ($password.val() == "") {
+                        $password.focus();
+                        $.login.formMessage('请输入登录密码。');
+                        return false;
+                    }
+                    else if ($code.val() == "") {
+                        $code.focus();
+                        $.login.formMessage('请输入验证码。');
+                        return false;
+                    }
+                    else {
+                        $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
+                        $.ajax({
+                            url: "/Login/CheckLogin",
+                            data: {
+                                username: $.trim($username.val()),
+                                password: $.md5($.trim($password.val())),
+                                code: $.trim($code.val())
+                            },
+                            type: "post",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.state == "success") {
+                                    $("#login_button").find('span').html("登录成功，正在跳转...");
+                                    window.setTimeout(function () {
+                                        window.location.href = "/Home/Index";
+                                    }, 500);
+                                } else {
+                                    $("#login_button").removeAttr('disabled').find('span').html("登录");
+                                    $("#switchCode").trigger("click");
+                                    $code.val('');
+                                    $.login.formMessage(data.message);
+                                }
+                            }
+                        });
+                    }
+                },
+                init: function () {
+                    $('.wrapper').height($(window).height());
+                    $(".container").css("margin-top", ($(window).height() - $(".container").height()) / 2 - 50);
+                    $(window).resize(function (e) {
+                        $('.wrapper').height($(window).height());
+                        $(".container").css("margin-top", ($(window).height() - $(".container").height()) / 2 - 50);
+                    });
+                    $("#switchCode").click(function () {
+                        $("#imgcode").attr("src", "/Login/GetAuthCode?time=" + Math.random());
+                    });
+                    //var login_error = top.$.cookie('nfine_login_error');
+                    //if (login_error != null) {
+                    //    switch (login_error) {
+                    //        case "overdue":
+                    //            $.login.formMessage("系统登录已超时,请重新登录");
+                    //            break;
+                    //        case "OnLine":
+                    //            $.login.formMessage("您的帐号已在其它地方登录,请重新登录");
+                    //            break;
+                    //        case "-1":
+                    //            $.login.formMessage("系统未知错误,请重新登录");
+                    //            break;
+                    //    }
+                    //    top.$.cookie('nfine_login_error', '', { path: "/", expires: -1 });
+                    //}
+                    $("#login_button").click(function () {
+                        $.login.loginClick();
+                    });
+                    document.onkeydown = function (e) {
+                        if (!e) e = window.event;
+                        if ((e.keyCode || e.which) == 13) {
+                            document.getElementById("login_button").focus();
+                            document.getElementById("login_button").click();
+                        }
+                    }
+                }
+            };
+            $(function () {
+                $.login.init();
+            });
+        })(jQuery);
+    </script>
+    <script type="text/javascript">
+        function getBrowserInfo() {
+            var agent = navigator.userAgent.toLowerCase();
+            var regStr_ie = /msie [\d.]+;/gi;
+            var regStr_ff = /firefox\/[\d.]+/gi
+            var regStr_chrome = /chrome\/[\d.]+/gi;
+            var regStr_saf = /safari\/[\d.]+/gi;
+            //IE"mozilla/5.0 (windows nt 6.1; wow64; trident/7.0; slcc2; .net clr 2.0.50727; .net clr 3.5.30729; .net clr 3.0.30729; media center pc 6.0; infopath.2; .net4.0c; .net4.0e; rv:11.0) like gecko"
+            //if (agent.indexOf("msie") > 0) {
+            //    var s = agent.match(regStr_ie);
+            //    var ss = s[0].split('/');
+            //    if (ss[1].split('.')[0] < 9) {
+            //        return false;
+            //    }
+            //}
+            if (window.ActiveXObject || window.msIsStaticHTML) {
+                var ie = 6;
+                if (!!window.XMLHttpRequest) { ie = 7 };
+                if (navigator.userAgent.indexOf("MSIE 7.0") != -1) { ie = 7 };
+                if (navigator.userAgent.indexOf("Trident/4.0") != -1) { ie = 8 };
+                if (navigator.userAgent.indexOf("Trident/5.0") != -1) { ie = 9 };
+                if (navigator.userAgent.indexOf("Trident/6.0") != -1) { ie = 10 };
+                if (navigator.userAgent.indexOf("Trident/7.0") != -1 || "undefined" == typeof attachEvent) { ie = 11 };
+                if (ie < 9) {
+                    return false;
+                }
+            }
+            //firefox
+            if (agent.indexOf("firefox") > 0) {
+                return agent.match(regStr_ff);
+            }
+            //Chrome
+            if (agent.indexOf("chrome") > 0) {
+                var s = agent.match(regStr_chrome);
+                var ss = s[0].split('/');
+                //var is360 = _mime("type", "application/vnd.chromium.remoting-viewer");
+                if (ss[1].split('.')[0] < 50) {
+                    return false;
+                }
+            }
+            //Safari
+            if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+                return agent.match(regStr_saf);
+                return true;
+            }
+            return true;
+        }
+        //检测是否是谷歌内核(可排除360及谷歌以外的浏览器)
+        function isChrome() {
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("chrome") > 1;
+        }
+        //测试mime
+        function _mime(option, value) {
+            var mimeTypes = navigator.mimeTypes;
+            for (var mt in mimeTypes) {
+                if (mimeTypes[mt][option] == value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        window.onload = function () {
+            if (!getBrowserInfo()) {
+                $('#dv_llq').show();
+            }
+            //application/vnd.chromium.remoting-viewer 可能为360特有
+            //var is360 = _mime("type", "application/vnd.chromium.remoting-viewer");
+        }
+    </script>
+}
+
+
+
+

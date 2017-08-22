@@ -1,0 +1,10 @@
+D:\cms_work\test_pro\WJ.Promoter.System\WJ.PromoterSys.Web.Model\bin\Debug\WJ.PromoterSys.Web.Model.dll
+D:\cms_work\test_pro\WJ.Promoter.System\WJ.PromoterSys.Web.Model\bin\Debug\WJ.PromoterSys.Web.Model.pdb
+D:\cms_work\test_pro\WJ.Promoter.System\WJ.PromoterSys.Web.Model\obj\Debug\WJ.PromoterSys.Web.Model.csprojResolveAssemblyReference.cache
+D:\cms_work\test_pro\WJ.Promoter.System\WJ.PromoterSys.Web.Model\obj\Debug\WJ.PromoterSys.Web.Model.dll
+D:\cms_work\test_pro\WJ.Promoter.System\WJ.PromoterSys.Web.Model\obj\Debug\WJ.PromoterSys.Web.Model.pdb
+D:\SVNCode\Paltform\NewPromoterSystem\WJ.Promoter.System\WJ.PromoterSys.Web.Model\bin\Debug\WJ.PromoterSys.Web.Model.dll
+D:\SVNCode\Paltform\NewPromoterSystem\WJ.Promoter.System\WJ.PromoterSys.Web.Model\bin\Debug\WJ.PromoterSys.Web.Model.pdb
+D:\SVNCode\Paltform\NewPromoterSystem\WJ.Promoter.System\WJ.PromoterSys.Web.Model\obj\Debug\WJ.PromoterSys.Web.Model.csprojResolveAssemblyReference.cache
+D:\SVNCode\Paltform\NewPromoterSystem\WJ.Promoter.System\WJ.PromoterSys.Web.Model\obj\Debug\WJ.PromoterSys.Web.Model.dll
+D:\SVNCode\Paltform\NewPromoterSystem\WJ.Promoter.System\WJ.PromoterSys.Web.Model\obj\Debug\WJ.PromoterSys.Web.Model.pdb
